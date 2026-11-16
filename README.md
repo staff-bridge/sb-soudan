@@ -71,7 +71,7 @@ URLの最後に `?from=名前` を付けると、申し込み時に「流入元�
 - LINE： `https://staff-bridge.github.io/sb-soudan/?from=line`
 - 〇〇大学で配るチラシ： `https://staff-bridge.github.io/sb-soudan/?from=〇〇大学`
 
-QRコードは、このURLから作ってください。**QRコードを印刷したあとは、サイトのURL（sb-soudan の部分）を変えないでください。**
+QRコードは **https://staff-bridge.github.io/sb-soudan/qr.html**（社内用のQRコード作成ページ）で、場所の名前を入れて作れます。名前は半角英数字と「-」だけにしてください。**QRコードを印刷したあとは、サイトのURL（sb-soudan の部分）を変えないでください。**
 
 ## 更新するときの注意
 
@@ -88,4 +88,3 @@ cd ~/Documents/GitHub/sb-soudan && python3 -m http.server 8765
 ## これから追加するもの
 
 - 共有したときの画像 `img/ogp.png`（1200×630）
-- QRコード作成ページ

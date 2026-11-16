@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>QRコード作成｜就活きもち診断（社内用）</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#5E1F8C">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="css/style.css?v=20261116j">
+<style>
+.page { padding: 24px 0 0; display: flex; flex-direction: column; gap: 20px; }
+.page h1 { font-size: 24px; }
+.lead { color: var(--muted); font-size: 14px; margin: 0; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-weight: 500; }
+.hint { font-size: 13px; color: var(--muted); }
+input[type=text] { width: 100%; font: inherit; font-size: 16px; border: 2px solid var(--line); border-radius: 12px; padding: 12px 14px; min-height: 52px; }
+input[type=text]:focus { outline: none; border-color: var(--sky); }
+.presets { display: flex; flex-wrap: wrap; gap: 8px; }
+.presets button { border: 1.5px solid var(--line); background: #fff; border-radius: 999px; padding: 6px 14px; font-size: 14px; cursor: pointer; }
+.presets button:active { background: var(--pink-bg); }
+.err { color: #C0306E; font-size: 13px; font-weight: 500; margin: 0; }
+.card { border: 2px solid var(--line); border-radius: var(--radius); padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+#qr { width: 240px; max-width: 100%; aspect-ratio: 1; image-rendering: pixelated; }
+.url { font-family: ui-monospace, Menlo, monospace; font-size: 13px; word-break: break-all; text-align: center; background: var(--surface); border-radius: 8px; padding: 8px 12px; width: 100%; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.btn.sub { background: #fff; color: var(--plum); border: 2px solid var(--plum); box-shadow: none; min-height: 48px; font-size: 15px; padding: 0 22px; }
+.tips { background: var(--sky-bg); border-radius: 12px; padding: 14px 18px; font-size: 13.5px; }
+.tips ul { margin: 6px 0 0; padding-left: 1.2em; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a href="./"><img class="logo" src="img/logo-white.svg" alt="スタッフブリッジ" width="84" height="34"></a>
+    <span class="tagline">QRコード作成（社内用）</span>
+  </div>
+</header>
+
+<main class="container">
+  <section class="page">
+    <h1>チラシ用のQRコードを作る</h1>
+    <p class="lead">配る場所の名前を入れると、その場所専用のQRコードができます。そこから申し込みがあると、スプレッドシートの「流入元」にこの名前が入ります。</p>
+
+    <div class="field">
+      <label for="from">配る場所の名前</label>
+      <input type="text" id="from" placeholder="例：waseda、gosetsu-1205" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <span class="hint">半角の英数字と「-」だけ（20文字まで）。日本語を入れるとQRコードが細かくなり、読み取りにくくなります。</span>
+      <p class="err" id="err" hidden></p>
+    </div>
+
+    <div class="field">
+      <span class="hint">よく使う例（押すと入ります）</span>
+      <div class="presets">
+        <button type="button" data-v="flyer">flyer（チラシ全般）</button>
+        <button type="button" data-v="insta">insta</button>
+        <button type="button" data-v="line">line</button>
+        <button type="button" data-v="event">event（説明会）</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <canvas id="qr" width="1080" height="1080" aria-label="QRコード"></canvas>
+      <div class="url" id="url"></div>
+      <div class="row">
+        <a class="btn" id="dl" href="#" download="qr.png">画像を保存</a>
+        <button class="btn sub" type="button" id="copy">URLをコピー</button>
+      </div>
+    </div>
+
+    <div class="tips">
+      <b>チラシに入れるときのコツ</b>
+      <ul>
+        <li>印刷では <b>2cm×2cm 以上</b>の大きさにする</li>
+        <li>QRコードのまわりに白い余白を残す（画像にはすでに余白が入っています）</li>
+        <li>印刷したら、入稿前に自分のスマホで読み取れるか必ず確認する</li>
+        <li>このサイトのURL（sb-soudan の部分）は、印刷後は変えない</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer"><div class="container"><p>このページは社内用です。学生に案内する必要はありません。</p></div></footer>
+
+<script src="js/vendor/qrcode-generator-1.4.4.min.js"></script>
+<script>
+(function () {
+  var BASE = "https://staff-bridge.github.io/sb-soudan/";
+  var $ = function (id) { return document.getElementById(id); };
+  var input = $("from");
+
+  function clean(v) { return v.trim().toLowerCase(); }
+  function valid(v) { return v === "" || /^[a-z0-9-]{1,20}$/.test(v); }
+
+  function draw() {
+    var v = clean(input.value);
+    var ok = valid(v);
+    $("err").hidden = ok;
+    document.querySelector(".card").hidden = !ok;   // 入力が正しくないときは古いQRコードを保存できないよう隠す
+    if (!ok) { $("err").textContent = "半角の英数字と「-」だけで、20文字以内にしてください。"; return; }
+
+    var url = v ? BASE + "?from=" + v : BASE;
+    $("url").textContent = url;
+
+    // 誤り訂正レベルM（チラシの汚れや折れに少し強い）
+    var qr = qrcode(0, "M");
+    qr.addData(url);
+    qr.make();
+    var n = qr.getModuleCount();
+    var quiet = 4;                       // まわりの白い余白（4マス分）
+    var cv = $("qr");
+    var size = cv.width;
+    var cell = Math.floor(size / (n + quiet * 2));
+    var offset = Math.floor((size - cell * n) / 2);
+    var ctx = cv.getContext("2d");
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = "#000";
+    for (var r = 0; r < n; r++) for (var c = 0; c < n; c++) {
+      if (qr.isDark(r, c)) ctx.fillRect(offset + c * cell, offset + r * cell, cell, cell);
+    }
+    $("dl").href = cv.toDataURL("image/png");
+    $("dl").download = "sb-soudan-qr" + (v ? "-" + v : "") + ".png";
+  }
+
+  input.addEventListener("input", draw);
+  document.querySelectorAll(".presets button").forEach(function (b) {
+    b.addEventListener("click", function () { input.value = b.getAttribute("data-v"); draw(); });
+  });
+  $("copy").addEventListener("click", function () {
+    var t = $("url").textContent;
+    var done = function () { $("copy").textContent = "コピーしました"; setTimeout(function () { $("copy").textContent = "URLをコピー"; }, 1500); };
+    if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, function () {});
+  });
+  draw();
+})();
+</script>
+</body>
+</html>
