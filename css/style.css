@@ -107,7 +107,7 @@ h1, h2, h3 {
   overflow: hidden;
 }
 /* 画像が読み込めたら、枠の形を絵に合わせる（縦長の絵も小さくならない） */
-.illust.loaded { aspect-ratio: auto !important; padding: 16px; }
+.illust.loaded { aspect-ratio: auto !important; background: none; border-radius: 0; padding: 8px 0; }
 .illust img { width: auto; max-width: 100%; height: auto; max-height: 280px; }
 .illust.empty::after {
   content: "";
