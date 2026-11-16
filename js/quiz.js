@@ -107,7 +107,6 @@
     });
     set($("r-style"), C.questions.q5.options[state.style].message);
     set($("r-stage"), "あなたの今の状況：" + C.questions.q4.options[state.stage].label);
-    $("r-help").hidden = state.type !== "t6";
 
     var q = new URLSearchParams({ type: state.type, stage: String(state.stage), style: String(state.style) });
     var from = window.SB.getFrom();
