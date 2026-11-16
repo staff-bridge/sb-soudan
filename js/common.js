@@ -17,12 +17,13 @@
     // イラスト枠に画像を入れる。画像がまだ無いときは淡い丸を表示
     setIllust: function (el, file) {
       el.innerHTML = "";
+      el.classList.remove("loaded");
       el.classList.add("empty");
       if (!file) return;
       var img = new Image();
       img.alt = "";
       img.decoding = "async";
-      img.onload = function () { el.classList.remove("empty"); el.appendChild(img); };
+      img.onload = function () { el.classList.remove("empty"); el.classList.add("loaded"); el.appendChild(img); };
       img.src = "img/" + file;
     }
   };
