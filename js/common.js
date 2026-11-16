@@ -8,7 +8,23 @@
     if (from) sessionStorage.setItem(FROM_KEY, from.slice(0, 60));
   } catch (e) { /* 保存できない環境でも動くようにする */ }
 
+  // 日本語を言葉の切れ目で改行させる（iPhoneのSafari対策）。BudouX の <budoux-ja> で包む
+  function phrase(el) {
+    if (!el || el.querySelector("budoux-ja") || el.closest("budoux-ja")) return;
+    var bx = document.createElement("budoux-ja");
+    while (el.firstChild) bx.appendChild(el.firstChild);
+    el.appendChild(bx);
+  }
+
   window.SB = {
+    // 文字を入れて、言葉の切れ目で改行されるようにする
+    setText: function (el, text) {
+      el.textContent = "";
+      var bx = document.createElement("budoux-ja");
+      bx.textContent = text;
+      el.appendChild(bx);
+    },
+    phrase: phrase,
     getFrom: function () {
       var v = params.get("from");
       if (v) return v.slice(0, 60);
@@ -27,6 +43,9 @@
       img.src = "img/" + file;
     }
   };
+
+  // 最初から書いてある見出し・文章も、言葉の切れ目で改行させる
+  document.querySelectorAll("h1, h2, h3, p, legend, .points strong, .points span, .hint").forEach(phrase);
 
   document.querySelectorAll("[data-img]").forEach(function (el) {
     window.SB.setIllust(el, el.getAttribute("data-img"));

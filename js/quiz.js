@@ -33,7 +33,7 @@
 
     var body = $("qbody");
     body.classList.remove("fade"); void body.offsetWidth; body.classList.add("fade");
-    $("qtitle").textContent = q.title;
+    window.SB.setText($("qtitle"), q.title);
 
     var ul = $("options");
     ul.innerHTML = "";
@@ -44,8 +44,8 @@
       b.className = "option" + (state.current === "q1" ? " feeling" : "");
       b.innerHTML = '<span class="mark">' + "ABCD"[i] + '</span><span class="txt"><span class="label"></span>' +
         (opt.sub ? '<span class="sub"></span>' : "") + "</span>";
-      b.querySelector(".label").textContent = opt.label;
-      if (opt.sub) b.querySelector(".sub").textContent = opt.sub;
+      window.SB.setText(b.querySelector(".label"), opt.label);
+      if (opt.sub) window.SB.setText(b.querySelector(".sub"), opt.sub);
       b.addEventListener("click", function () { choose(i, b); });
       li.appendChild(b);
       ul.appendChild(li);
@@ -91,15 +91,16 @@
     var r = C.results[state.type];
     $("r-tag").textContent = "あなたは " + r.no + " " + r.name;
     window.SB.setIllust($("r-illust"), r.image);
-    $("r-title").textContent = r.title;
-    $("r-lead").textContent = r.lead;
+    var set = window.SB.setText;
+    set($("r-title"), r.title);
+    set($("r-lead"), r.lead);
     var ul = $("r-can");
     ul.innerHTML = "";
     r.can.forEach(function (t) {
-      var li = document.createElement("li"); li.textContent = t; ul.appendChild(li);
+      var li = document.createElement("li"); set(li, t); ul.appendChild(li);
     });
-    $("r-style").textContent = C.questions.q5.options[state.style].message;
-    $("r-stage").textContent = "あなたの今の状況：" + C.questions.q4.options[state.stage].label;
+    set($("r-style"), C.questions.q5.options[state.style].message);
+    set($("r-stage"), "あなたの今の状況：" + C.questions.q4.options[state.stage].label);
     $("r-help").hidden = state.type !== "t6";
 
     var q = new URLSearchParams({ type: state.type, stage: String(state.stage), style: String(state.style) });
