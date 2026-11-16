@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=20261116c">
+<link rel="stylesheet" href="css/style.css?v=20261116d">
 <style>
 /* トップ */
 .hero { padding: 28px 0 8px; display: flex; flex-direction: column; gap: 18px; }
@@ -42,7 +42,11 @@
 .about h2 { font-size: 21px; }
 .about .eyebrow { font-family: var(--display); color: var(--pink); font-weight: 700; font-size: 14px; }
 .points { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
-.points li { background: var(--surface); border-radius: var(--radius); padding: 16px 18px; display: flex; flex-direction: column; gap: 2px; }
+.points li { background: var(--surface); border-radius: var(--radius); padding: 16px 18px; display: flex; align-items: center; gap: 14px; }
+.points .ico { flex: none; width: 52px; height: 52px; border-radius: 50%; background: #fff; display: grid; place-items: center; }
+.points .ico svg { width: 28px; height: 28px; fill: none; stroke: var(--pink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.points .ico .accent { stroke: var(--plum); }
+.points .pt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .points strong { font-family: var(--display); color: var(--plum); font-size: 16px; }
 .points span { font-size: 14px; color: var(--muted); }
 
@@ -122,11 +126,20 @@
 
     <div class="about">
       <span class="eyebrow">就活相談会について</span>
-      <h2>スタッフと1対1で、<br>ゆっくり話せる相談会です</h2>
+      <h2>スタッフと1対1で、<br>ゆっくり話せる相談会です。</h2>
       <ul class="points">
-        <li><strong>日程はあなたに合わせて</strong><span>都合のよい日時を教えてもらい、こちらから調整のご連絡をします。</span></li>
-        <li><strong>来社でもオンラインでも</strong><span>家からでも参加できます。</span></li>
-        <li><strong>うまく話せなくても大丈夫</strong><span>気持ちがまとまっていなくてもOK。話しながら一緒に整理します。</span></li>
+        <li>
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path class="accent" d="M9 15l2 2 4-4"/></svg></span>
+          <div class="pt"><strong>日程はあなたに合わせて！</strong><span>都合のよい日時を教えてもらい、こちらから調整のご連絡をします。</span></div>
+        </li>
+        <li>
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2.5 19.5h19"/><circle class="accent" cx="12" cy="9.5" r="1.8"/><path class="accent" d="M9 13.5c.6-1.2 1.7-1.8 3-1.8s2.4.6 3 1.8"/></svg></span>
+          <div class="pt"><strong>来社でもオンラインでも！</strong><span>ご自宅からでも参加できます。</span></div>
+        </li>
+        <li>
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4h0A1.5 1.5 0 0 1 4 14.5z"/><path class="accent" d="M8.5 10h.01M12 10h.01M15.5 10h.01" stroke-width="2.6"/></svg></span>
+          <div class="pt"><strong>うまく話せなくても大丈夫！</strong><span>気持ちがまとまっていなくてもOK。話しながら一緒に整理します。</span></div>
+        </li>
       </ul>
     </div>
   </section>
@@ -175,9 +188,9 @@
   </div>
 </footer>
 
-<script src="js/content.js?v=20261116c"></script>
-<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261116c"></script>
-<script src="js/common.js?v=20261116c"></script>
-<script src="js/quiz.js?v=20261116c"></script>
+<script src="js/content.js?v=20261116d"></script>
+<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261116d"></script>
+<script src="js/common.js?v=20261116d"></script>
+<script src="js/quiz.js?v=20261116d"></script>
 </body>
 </html>
