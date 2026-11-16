@@ -48,8 +48,9 @@
   padding: 16px 18px; min-height: 64px;
   display: flex; align-items: center; gap: 14px;
   transition: border-color .15s, background .15s, transform .1s;
+  -webkit-tap-highlight-color: transparent;
 }
-.option:hover { border-color: #F2B3D0; }
+@media (hover: hover) and (pointer: fine) { .option:hover { border-color: #F2B3D0; } }
 .option:active, .option.chosen { border-color: var(--pink); background: var(--pink-bg); transform: scale(.99); }
 .option .mark {
   flex: none; width: 30px; height: 30px; border-radius: 50%;
