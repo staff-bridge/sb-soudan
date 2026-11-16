@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>就活きもち診断｜スタッフブリッジ就活相談会</title>
+<meta name="description" content="いまの就活の気持ちを4択で選ぶだけ。あなたのモヤモヤに合った相談のかたちが見つかります。スタッフブリッジの個別就活相談会。">
+<meta name="theme-color" content="#5E1F8C">
+<meta property="og:type" content="website">
+<meta property="og:title" content="就活きもち診断｜スタッフブリッジ就活相談会">
+<meta property="og:description" content="いまの就活の気持ちを4択で選ぶだけ。1分でできる診断です。">
+<meta property="og:url" content="https://staff-bridge.github.io/sb-soudan/">
+<meta property="og:image" content="https://staff-bridge.github.io/sb-soudan/img/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* トップ */
+.hero { padding: 28px 0 8px; display: flex; flex-direction: column; gap: 18px; }
+.hero .eyebrow { font-family: var(--display); color: var(--pink); font-weight: 700; font-size: 14px; letter-spacing: .04em; }
+.hero h1 { font-size: clamp(26px, 7vw, 34px); }
+.hero .illust { aspect-ratio: 16 / 10; }
+.hero p { color: var(--muted); }
+.hero .meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-size: 13px; background: var(--sky-bg); color: var(--fg); padding: 2px 12px; border-radius: 999px; }
+
+.about { margin-top: 48px; display: flex; flex-direction: column; gap: 20px; }
+.about h2 { font-size: 21px; }
+.about .eyebrow { font-family: var(--display); color: var(--pink); font-weight: 700; font-size: 14px; }
+.points { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.points li { background: var(--surface); border-radius: var(--radius); padding: 16px 18px; display: flex; flex-direction: column; gap: 2px; }
+.points strong { font-family: var(--display); color: var(--plum); font-size: 16px; }
+.points span { font-size: 14px; color: var(--muted); }
+
+/* 診断 */
+.quiz { padding: 20px 0 0; display: flex; flex-direction: column; gap: 18px; }
+.quiz-top { display: flex; align-items: center; justify-content: space-between; min-height: 40px; }
+.qno { font-family: var(--display); color: var(--pink); font-weight: 700; }
+.progress { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.progress > div { height: 100%; width: 0; background: var(--pink); border-radius: 4px; transition: width .3s; }
+.quiz h2 { font-size: clamp(21px, 5.6vw, 25px); }
+.options { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.option {
+  width: 100%; text-align: left; cursor: pointer;
+  background: #fff; border: 2px solid var(--line); border-radius: 18px;
+  padding: 16px 18px; min-height: 64px;
+  display: flex; align-items: center; gap: 14px;
+  transition: border-color .15s, background .15s, transform .1s;
+}
+.option:hover { border-color: #F2B3D0; }
+.option:active, .option.chosen { border-color: var(--pink); background: var(--pink-bg); transform: scale(.99); }
+.option .mark {
+  flex: none; width: 30px; height: 30px; border-radius: 50%;
+  background: var(--surface); color: var(--plum);
+  font-family: var(--display); font-weight: 700; font-size: 14px;
+  display: grid; place-items: center;
+}
+.option .txt { display: flex; flex-direction: column; line-height: 1.5; min-width: 0; }
+.option .label { font-weight: 500; font-size: 16px; }
+.option .sub { font-size: 13.5px; color: var(--muted); }
+.option.feeling .label { font-family: var(--display); font-size: 19px; color: var(--plum); }
+
+/* 結果 */
+.result { padding: 24px 0 0; display: flex; flex-direction: column; gap: 18px; }
+.result .tag { align-self: flex-start; background: var(--pink-bg); color: #A8306F; font-weight: 700; font-family: var(--display); font-size: 14px; padding: 4px 14px; border-radius: 999px; }
+.result .illust { aspect-ratio: 16 / 10; }
+.result h1 { font-size: clamp(22px, 6vw, 28px); }
+.result .card { background: var(--surface); border-radius: var(--radius); padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; }
+.result .card h2 { font-size: 16px; }
+.result ul { margin: 0; padding-left: 1.3em; }
+.result .note { border: 2px dashed var(--line); border-radius: var(--radius); padding: 14px 18px; font-size: 15px; }
+.result .note b { color: var(--plum); font-family: var(--display); display: block; font-size: 14px; }
+.status { font-size: 14px; color: var(--muted); }
+.cta { display: flex; flex-direction: column; gap: 10px; align-items: stretch; margin-top: 6px; }
+.cta small { text-align: center; color: var(--muted); }
+.help { font-size: 13px; color: var(--muted); background: var(--sky-bg); border-radius: 12px; padding: 12px 16px; }
+.fade { animation: fade .35s ease both; }
+@keyframes fade { from { opacity: .001; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <img class="logo" src="img/logo-white.svg" alt="スタッフブリッジ" width="84" height="34">
+    <span class="tagline">就活相談会</span>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- トップ -->
+  <section id="view-top">
+    <div class="hero">
+      <span class="eyebrow">1分でできる 就活きもち診断</span>
+      <h1>いまの就活の気持ち、<br>4択で教えてください。</h1>
+      <div class="illust" data-img="hero.svg"></div>
+      <p>選んでいくだけで、あなたのモヤモヤに合った相談のかたちが見つかります。</p>
+      <div class="meta"><span class="chip">全4〜5問</span><span class="chip">約1分</span><span class="chip">個別の相談会</span></div>
+      <button class="btn block" id="start" type="button">診断をはじめる</button>
+    </div>
+
+    <div class="about">
+      <span class="eyebrow">就活相談会について</span>
+      <h2>スタッフと1対1で、<br>ゆっくり話せる相談会です</h2>
+      <ul class="points">
+        <li><strong>日程はあなたに合わせて</strong><span>都合のよい日時を教えてもらい、こちらから調整のご連絡をします。</span></li>
+        <li><strong>来社でもオンラインでも</strong><span>家からでも参加できます。</span></li>
+        <li><strong>うまく話せなくても大丈夫</strong><span>気持ちがまとまっていなくてもOK。話しながら一緒に整理します。</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 診断 -->
+  <section id="view-quiz" class="quiz" hidden>
+    <div class="quiz-top">
+      <span class="qno" id="qno">Q.1</span>
+      <button class="link-btn" id="back" type="button">← ひとつ戻る</button>
+    </div>
+    <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+    <div id="qbody" class="fade">
+      <h2 id="qtitle"></h2>
+    </div>
+    <ul class="options" id="options"></ul>
+  </section>
+
+  <!-- 結果 -->
+  <section id="view-result" class="result" hidden>
+    <span class="tag" id="r-tag"></span>
+    <div class="illust" id="r-illust"></div>
+    <h1 id="r-title"></h1>
+    <p id="r-lead"></p>
+    <div class="card">
+      <h2>相談会でできること</h2>
+      <ul id="r-can"></ul>
+    </div>
+    <div class="note"><b>当日のすすめ方</b><span id="r-style"></span></div>
+    <p class="status" id="r-stage"></p>
+    <div class="cta">
+      <a class="btn block" id="r-entry" href="entry.html">相談会に申し込む</a>
+      <small>申し込みは2分ほどで終わります</small>
+      <button class="link-btn" id="retry" type="button" style="align-self:center">もう一度診断する</button>
+    </div>
+    <p class="help" id="r-help" hidden>
+      とてもつらいときは、ひとりで抱えこまずに専門の窓口にも相談してください。<br>
+      <a href="https://www.mhlw.go.jp/mamorouyokokoro/" target="_blank" rel="noopener">厚生労働省「まもろうよ こころ」</a>
+    </p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>運営：スタッフブリッジ ／ <a href="https://www.staff-b.com/privacy_reg/" target="_blank" rel="noopener">プライバシーポリシー</a></p>
+  </div>
+</footer>
+
+<script src="js/content.js"></script>
+<script src="js/common.js"></script>
+<script src="js/quiz.js"></script>
+</body>
+</html>
