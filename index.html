@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=20261116h">
+<link rel="stylesheet" href="css/style.css?v=20261116i">
 <style>
 /* トップ */
 .hero { padding: 28px 0 8px; display: flex; flex-direction: column; gap: 18px; }
@@ -53,6 +53,15 @@
 
 /* 来社の会場 */
 .place { border: 2px solid var(--line); border-radius: var(--radius); padding: 18px 20px; display: flex; flex-direction: column; gap: 4px; }
+/* 参加費・時間・参加方法 */
+.chip.free { background: var(--pink-bg); color: #A8306F; font-weight: 700; }
+.facts { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 2px solid var(--pink); border-radius: var(--radius); background: #fff; overflow: hidden; }
+.facts > div { padding: 12px 6px; text-align: center; display: flex; flex-direction: column; justify-content: center; gap: 2px; }
+.facts > div + div { border-left: 1.5px dashed var(--line); }
+.facts dt { font-size: 12px; color: var(--muted); }
+.facts dd { margin: 0; font-family: var(--display); font-weight: 700; color: var(--plum); font-size: 15px; line-height: 1.4; }
+.facts dd.big { color: var(--pink); font-size: 22px; }
+
 .place p { margin: 0; }
 .place-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
 .place .pin svg { width: 22px; height: 22px; display: block; fill: none; stroke: var(--pink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
@@ -136,7 +145,7 @@
       <h1 class="rise" style="--d:.1s">いまの就活の気持ち、<br>4択で教えてください。</h1>
       <div class="illust floaty rise" style="--d:.25s" data-img="hero.png"></div>
       <p class="rise" style="--d:.4s">選んでいくだけで、あなたのモヤモヤに合った相談のかたちが見つかります。</p>
-      <div class="meta rise" style="--d:.5s"><span class="chip">全4〜5問</span><span class="chip">約1分</span><span class="chip">個別の相談会</span></div>
+      <div class="meta rise" style="--d:.5s"><span class="chip">全4〜5問</span><span class="chip">約1分</span><span class="chip">個別の相談会</span><span class="chip free">参加費無料</span></div>
       <button class="btn block shine rise" style="--d:.6s" id="start" type="button">診断をはじめる</button>
     </div>
 
@@ -148,6 +157,11 @@
     <div class="about">
       <span class="eyebrow reveal">就活相談会について</span>
       <h2 class="reveal" style="--d:.08s">スタッフと1対1で、<br>ゆっくり話せる相談会です。</h2>
+      <dl class="facts reveal" style="--d:.12s">
+        <div><dt>参加費</dt><dd class="big">無料</dd></div>
+        <div><dt>時間</dt><dd>約60〜90分</dd></div>
+        <div><dt>参加方法</dt><dd>来社・<br>オンライン</dd></div>
+      </dl>
       <ul class="points">
         <li class="reveal" style="--d:.15s">
           <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path class="accent" d="M9 15l2 2 4-4"/></svg></span>
@@ -223,9 +237,9 @@
   </div>
 </footer>
 
-<script src="js/content.js?v=20261116h"></script>
-<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261116h"></script>
-<script src="js/common.js?v=20261116h"></script>
-<script src="js/quiz.js?v=20261116h"></script>
+<script src="js/content.js?v=20261116i"></script>
+<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261116i"></script>
+<script src="js/common.js?v=20261116i"></script>
+<script src="js/quiz.js?v=20261116i"></script>
 </body>
 </html>
