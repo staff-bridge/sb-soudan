@@ -143,6 +143,7 @@
   function done() {
     $("form-view").hidden = true;
     $("thanks-view").hidden = false;
+    window.SB_riseChildren($("thanks-view"), 0.05, 0.12);
     window.SB.setText($("thanks-msg"), "お申し込みを受け付けました。" + CFG.replyDays +
       "営業日以内に、担当者からメールまたはお電話で日程のご連絡をします。当日お話しできるのを楽しみにしています。");
     window.scrollTo(0, 0);

@@ -44,6 +44,30 @@
     }
   };
 
+  // スクロールして見えたら .reveal の要素をふわっと出す
+  document.documentElement.classList.add("js");
+  var reveals = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add("in"); });
+  }
+
+  // 中の要素を順番にふわっと出し直す（画面を切り替えたとき用）
+  window.SB_riseChildren = function (parent, start, step) {
+    Array.prototype.forEach.call(parent.children, function (el, i) {
+      el.classList.remove("rise");
+      void el.offsetWidth;
+      el.style.setProperty("--d", (start + i * step).toFixed(2) + "s");
+      el.classList.add("rise");
+    });
+  };
+
   // 最初から書いてある見出し・文章も、言葉の切れ目で改行させる
   document.querySelectorAll("h1, h2, h3, p, legend, .points strong, .points span, .hint").forEach(phrase);
 

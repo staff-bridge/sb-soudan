@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=20261116d">
+<link rel="stylesheet" href="css/style.css?v=20261116e">
 <style>
 /* トップ */
 .hero { padding: 28px 0 8px; display: flex; flex-direction: column; gap: 18px; }
@@ -36,7 +36,8 @@
 .marquee-track img { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; filter: brightness(0); opacity: .72; }
 @media (min-width: 600px) { .marquee-track li { width: 132px; height: 56px; margin: 14px 22px; } .marquee-track { animation-duration: 35s; } }
 @keyframes brand-flow { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } .marquee { overflow-x: auto; } }
+/* 「視差効果を減らす」がオンの端末でも、ロゴはゆっくり流し続ける */
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation-duration: 60s; } }
 
 .about { margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
 .about h2 { font-size: 21px; }
@@ -111,32 +112,32 @@
   <!-- トップ -->
   <section id="view-top">
     <div class="hero">
-      <span class="eyebrow">1分でできる 就活きもち診断</span>
-      <h1>いまの就活の気持ち、<br>4択で教えてください。</h1>
-      <div class="illust" data-img="hero.png"></div>
-      <p>選んでいくだけで、あなたのモヤモヤに合った相談のかたちが見つかります。</p>
-      <div class="meta"><span class="chip">全4〜5問</span><span class="chip">約1分</span><span class="chip">個別の相談会</span></div>
-      <button class="btn block" id="start" type="button">診断をはじめる</button>
+      <span class="eyebrow rise">1分でできる 就活きもち診断</span>
+      <h1 class="rise" style="--d:.1s">いまの就活の気持ち、<br>4択で教えてください。</h1>
+      <div class="illust floaty rise" style="--d:.25s" data-img="hero.png"></div>
+      <p class="rise" style="--d:.4s">選んでいくだけで、あなたのモヤモヤに合った相談のかたちが見つかります。</p>
+      <div class="meta rise" style="--d:.5s"><span class="chip">全4〜5問</span><span class="chip">約1分</span><span class="chip">個別の相談会</span></div>
+      <button class="btn block shine rise" style="--d:.6s" id="start" type="button">診断をはじめる</button>
     </div>
 
-    <div class="brands">
+    <div class="brands rise" style="--d:.75s">
       <p class="brands-label">採用実績のあるブランド</p>
       <div class="marquee"><div class="marquee-track" id="brandTrack"></div></div>
     </div>
 
     <div class="about">
-      <span class="eyebrow">就活相談会について</span>
-      <h2>スタッフと1対1で、<br>ゆっくり話せる相談会です。</h2>
+      <span class="eyebrow reveal">就活相談会について</span>
+      <h2 class="reveal" style="--d:.08s">スタッフと1対1で、<br>ゆっくり話せる相談会です。</h2>
       <ul class="points">
-        <li>
+        <li class="reveal" style="--d:.15s">
           <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path class="accent" d="M9 15l2 2 4-4"/></svg></span>
           <div class="pt"><strong>日程はあなたに合わせて！</strong><span>都合のよい日時を教えてもらい、こちらから調整のご連絡をします。</span></div>
         </li>
-        <li>
+        <li class="reveal" style="--d:.27s">
           <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2.5 19.5h19"/><circle class="accent" cx="12" cy="9.5" r="1.8"/><path class="accent" d="M9 13.5c.6-1.2 1.7-1.8 3-1.8s2.4.6 3 1.8"/></svg></span>
           <div class="pt"><strong>来社でもオンラインでも！</strong><span>ご自宅からでも参加できます。</span></div>
         </li>
-        <li>
+        <li class="reveal" style="--d:.39s">
           <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4h0A1.5 1.5 0 0 1 4 14.5z"/><path class="accent" d="M8.5 10h.01M12 10h.01M15.5 10h.01" stroke-width="2.6"/></svg></span>
           <div class="pt"><strong>うまく話せなくても大丈夫！</strong><span>気持ちがまとまっていなくてもOK。話しながら一緒に整理します。</span></div>
         </li>
@@ -160,7 +161,7 @@
   <!-- 結果 -->
   <section id="view-result" class="result" hidden>
     <span class="tag" id="r-tag"></span>
-    <div class="illust" id="r-illust"></div>
+    <div class="illust floaty" id="r-illust"></div>
     <h1 id="r-title"></h1>
     <p id="r-lead"></p>
     <div class="card">
@@ -188,9 +189,9 @@
   </div>
 </footer>
 
-<script src="js/content.js?v=20261116d"></script>
-<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261116d"></script>
-<script src="js/common.js?v=20261116d"></script>
-<script src="js/quiz.js?v=20261116d"></script>
+<script src="js/content.js?v=20261116e"></script>
+<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261116e"></script>
+<script src="js/common.js?v=20261116e"></script>
+<script src="js/quiz.js?v=20261116e"></script>
 </body>
 </html>

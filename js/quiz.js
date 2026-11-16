@@ -47,6 +47,8 @@
       window.SB.setText(b.querySelector(".label"), opt.label);
       if (opt.sub) window.SB.setText(b.querySelector(".sub"), opt.sub);
       b.addEventListener("click", function () { choose(i, b); });
+      li.className = "rise";
+      li.style.setProperty("--d", (0.12 + i * 0.07).toFixed(2) + "s");
       li.appendChild(b);
       ul.appendChild(li);
     });
@@ -109,6 +111,7 @@
     $("r-entry").href = "entry.html?" + q.toString();
 
     show("result");
+    window.SB_riseChildren(views.result, 0.05, 0.1);
   }
 
   // 採用実績ブランドのロゴを横に流す。同じ列を2回並べて途切れずに流れ続けるようにする（2回目は読み上げ対象外）
