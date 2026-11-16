@@ -38,7 +38,18 @@
 
   gtag("js", new Date());
   var conf = {};
-  // QRコードは参照元が残らないので、?from= を参照元として扱う
-  if (from) { conf.campaign_source = from; conf.campaign_medium = "sb-from"; conf.campaign_name = "sb-soudan"; }
+  // QRコードは参照元が残らないので、?from= を参照元（utm_source）としてGA4に渡す。
+  // 実際のアドレスは変えず、GA4に伝えるページのアドレスにだけ utm を付ける
+  if (from) {
+    try {
+      var u = new URL(location.href);
+      if (!u.searchParams.get("utm_source")) {
+        u.searchParams.set("utm_source", from);
+        u.searchParams.set("utm_medium", "sb-from");
+        u.searchParams.set("utm_campaign", "sb-soudan");
+      }
+      conf.page_location = u.toString();
+    } catch (e) { /* 古いブラウザではそのまま */ }
+  }
   gtag("config", id, conf);
 })();
