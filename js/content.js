@@ -101,6 +101,16 @@ window.SB_CONTENT = {
     }
   },
 
+  /* トップに流れる「採用実績のあるブランド」のロゴ。この順番で流れます。
+     足すときは img/brands に「白背景を透明にしたwebp」を置き、ここに1行追加する */
+  brands: [
+    ["maisonmargiela.webp", "Maison Margiela"], ["shiro.webp", "SHIRO"], ["humanmade.webp", "HUMAN MADE"],
+    ["prada.webp", "PRADA"], ["newera.webp", "NEW ERA"], ["calvinklein.webp", "Calvin Klein"],
+    ["lacoste.webp", "LACOSTE"], ["briefing.webp", "BRIEFING"], ["maisonmiharayasuhiro.webp", "Maison MIHARA YASUHIRO"],
+    ["longchamp.webp", "LONGCHAMP"], ["tomorrowland.webp", "TOMORROWLAND"], ["johnmastersorganics.webp", "john masters organics"],
+    ["salomon.webp", "SALOMON"], ["canadagoose.webp", "CANADA GOOSE"], ["newbalance.webp", "New Balance"]
+  ],
+
   /* 結果タイプ。image は img フォルダに置くイラストのファイル名です */
   results: {
     t1: {

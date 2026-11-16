@@ -111,6 +111,15 @@
     show("result");
   }
 
+  // 採用実績ブランドのロゴを横に流す。同じ列を2回並べて途切れずに流れ続けるようにする（2回目は読み上げ対象外）
+  var track = $("brandTrack");
+  if (track && C.brands) {
+    var one = C.brands.map(function (b) {
+      return '<li><img src="img/brands/' + b[0] + '" alt="' + b[1] + '" width="160" height="100" decoding="async"></li>';
+    }).join("");
+    track.innerHTML = "<ul>" + one + '</ul><ul aria-hidden="true">' + one + "</ul>";
+  }
+
   $("start").addEventListener("click", function () { reset(); renderQuestion(); show("quiz"); });
   $("back").addEventListener("click", back);
   $("retry").addEventListener("click", function () { reset(); show("top"); });

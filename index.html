@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=20261116b">
+<link rel="stylesheet" href="css/style.css?v=20261116c">
 <style>
 /* トップ */
 .hero { padding: 28px 0 8px; display: flex; flex-direction: column; gap: 18px; }
@@ -26,7 +26,19 @@
 .hero .meta { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip { font-size: 13px; background: var(--sky-bg); color: var(--fg); padding: 2px 12px; border-radius: 999px; }
 
-.about { margin-top: 48px; display: flex; flex-direction: column; gap: 20px; }
+/* 採用実績ブランドのロゴ（横に流れ続ける帯。面接対策ガイドと同じ作り） */
+.brands { margin-top: 36px; }
+.brands-label { text-align: center; color: var(--pink); font-family: var(--display); font-weight: 700; font-size: 14px; margin: 0 0 4px; }
+.marquee { overflow: hidden; width: 100vw; margin-left: calc(50% - 50vw); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee-track { display: flex; width: max-content; animation: brand-flow 27.5s linear infinite; will-change: transform; }
+.marquee-track ul { display: flex; list-style: none; margin: 0; padding: 0; }
+.marquee-track li { flex: none; width: 96px; height: 44px; margin: 10px 14px; display: flex; align-items: center; justify-content: center; }
+.marquee-track img { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; filter: brightness(0); opacity: .72; }
+@media (min-width: 600px) { .marquee-track li { width: 132px; height: 56px; margin: 14px 22px; } .marquee-track { animation-duration: 35s; } }
+@keyframes brand-flow { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } .marquee { overflow-x: auto; } }
+
+.about { margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
 .about h2 { font-size: 21px; }
 .about .eyebrow { font-family: var(--display); color: var(--pink); font-weight: 700; font-size: 14px; }
 .points { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
@@ -103,6 +115,11 @@
       <button class="btn block" id="start" type="button">診断をはじめる</button>
     </div>
 
+    <div class="brands">
+      <p class="brands-label">採用実績のあるブランド</p>
+      <div class="marquee"><div class="marquee-track" id="brandTrack"></div></div>
+    </div>
+
     <div class="about">
       <span class="eyebrow">就活相談会について</span>
       <h2>スタッフと1対1で、<br>ゆっくり話せる相談会です</h2>
@@ -158,9 +175,9 @@
   </div>
 </footer>
 
-<script src="js/content.js?v=20261116b"></script>
-<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261116b"></script>
-<script src="js/common.js?v=20261116b"></script>
-<script src="js/quiz.js?v=20261116b"></script>
+<script src="js/content.js?v=20261116c"></script>
+<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261116c"></script>
+<script src="js/common.js?v=20261116c"></script>
+<script src="js/quiz.js?v=20261116c"></script>
 </body>
 </html>
