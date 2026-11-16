@@ -4,6 +4,9 @@
   var CFG = window.SB_CONFIG;
   var $ = function (id) { return document.getElementById(id); };
   var params = new URLSearchParams(location.search);
+  // GA4への記録（個人情報は送らない）
+  var track = function (name, p) { if (window.SB_track) window.SB_track(name, p); };
+  var started = false;
 
   // ── 診断結果を受け取る（URLの ?type=t3&stage=2&style=1） ──
   var typeId = params.get("type");
@@ -76,7 +79,10 @@
 
   // 入力し直したら赤枠を消す
   document.querySelectorAll("#entry input, #entry select, #entry textarea").forEach(function (el) {
-    el.addEventListener("input", function () { mark(el, false); $("form-err").hidden = true; });
+    el.addEventListener("input", function () {
+      mark(el, false); $("form-err").hidden = true;
+      if (!started) { started = true; track("entry_start", { result_type: typeId || "none" }); }
+    });
     el.addEventListener("change", function () {
       mark(el, false);
       if (el.name === "method") $("method-box").classList.remove("invalid");
@@ -88,6 +94,7 @@
     e.preventDefault();
     var errors = validate();
     if (errors.length) {
+      track("entry_error", { error_count: errors.length });
       $("form-err").textContent = errors.map(function (x) { return "・" + x.msg; }).join("\n");
       $("form-err").style.whiteSpace = "pre-line";
       $("form-err").hidden = false;
@@ -118,7 +125,10 @@
     btn.disabled = true;
     btn.textContent = "送信中…";
 
-    send(values).then(done, function () {
+    send(values).then(function () {
+      track("generate_lead", { result_type: typeId || "none", method: values.method === "来社" ? "visit" : "online" });
+      done();
+    }, function () {
       btn.disabled = false;
       btn.textContent = "この内容で申し込む";
       $("form-err").textContent = "送信できませんでした。通信状況を確認して、もう一度お試しください。";

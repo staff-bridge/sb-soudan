@@ -28,6 +28,9 @@ window.SB_CONFIG = {
     from: "1427566714"      // どこから来たか（自動）
   },
 
+  // Googleアナリティクス（GA4）の測定ID。空にすると計測しない
+  gaId: "G-C0NHPCZW0E",
+
   privacyUrl: "https://www.staff-b.com/privacy_reg/",
   replyDays: 2   // 「〇営業日以内にご連絡します」の日数
 };

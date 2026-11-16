@@ -3,6 +3,8 @@
   var C = window.SB_CONTENT;
   var $ = function (id) { return document.getElementById(id); };
   var views = { top: $("view-top"), quiz: $("view-quiz"), result: $("view-result") };
+  // GA4への記録（個人情報は送らない）。analytics.js が無くても動くようにする
+  var track = function (name, params) { if (window.SB_track) window.SB_track(name, params); };
 
   // 回答の記録。history は「戻る」用
   var state;
@@ -66,6 +68,7 @@
     var id = state.current;
     var opt = C.questions[id].options[i];
     state.history.push({ id: id, choice: i, type: state.type });
+    track("quiz_answer", { question_id: id, answer: "ABCD"[i], step: state.history.length });
 
     if (id === "q4") { state.stage = i; state.current = "q5"; return renderQuestion(); }
     if (id === "q5") { state.style = i; return renderResult(); }
@@ -82,6 +85,7 @@
   function back() {
     var last = state.history.pop();
     if (!last) return;
+    track("quiz_back", { question_id: last.id });
     state.current = last.id;
     state.type = last.type;
     if (last.id === "q4") state.stage = null;
@@ -112,19 +116,21 @@
 
     show("result");
     window.SB_riseChildren(views.result, 0.05, 0.1);
+    track("quiz_result", { result_type: state.type, result_name: r.name, stage: state.stage, style: state.style });
   }
 
   // 採用実績ブランドのロゴを横に流す。同じ列を2回並べて途切れずに流れ続けるようにする（2回目は読み上げ対象外）
-  var track = $("brandTrack");
-  if (track && C.brands) {
+  var brandTrack = $("brandTrack");
+  if (brandTrack && C.brands) {
     var one = C.brands.map(function (b) {
       return '<li><img src="img/brands/' + b[0] + '" alt="' + b[1] + '" width="160" height="100" decoding="async"></li>';
     }).join("");
-    track.innerHTML = "<ul>" + one + '</ul><ul aria-hidden="true">' + one + "</ul>";
+    brandTrack.innerHTML = "<ul>" + one + '</ul><ul aria-hidden="true">' + one + "</ul>";
   }
 
-  $("start").addEventListener("click", function () { reset(); renderQuestion(); show("quiz"); });
+  $("start").addEventListener("click", function () { reset(); renderQuestion(); show("quiz"); track("quiz_start"); });
   $("back").addEventListener("click", back);
-  $("retry").addEventListener("click", function () { reset(); show("top"); });
+  $("retry").addEventListener("click", function () { reset(); show("top"); track("quiz_retry"); });
+  $("r-entry").addEventListener("click", function () { track("entry_click", { result_type: state.type }); });
   reset();
 })();

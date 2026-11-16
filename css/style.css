@@ -160,3 +160,5 @@ h1, h2, h3 {
   .floaty.loaded img, .btn.shine::after, .js .reveal.in .ico { animation: none; }
 }
 @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+
+.ga-note { margin: 10px 0 0; font-size: 11.5px; line-height: 1.7; opacity: .85; }
