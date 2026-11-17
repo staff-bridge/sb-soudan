@@ -15,10 +15,30 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=20261117d">
+<link rel="stylesheet" href="css/style.css?v=20261117e">
 <style>
-/* トップ */
-.hero { padding: 28px 0 8px; display: flex; flex-direction: column; gap: 18px; }
+/* 会社概要（トップの一番上） */
+.company { padding: 28px 0 8px; display: flex; flex-direction: column; gap: 14px; }
+.company .eyebrow { font-family: var(--display); color: var(--pink); font-weight: 700; font-size: 13px; letter-spacing: .08em; }
+.company h1 { font-size: clamp(28px, 8vw, 36px); letter-spacing: .04em; }
+.company p { margin: 0; color: var(--fg); font-size: 15px; }
+.co-table { margin: 4px 0 0; border-top: 1.5px solid var(--line); }
+.co-table > div { display: grid; grid-template-columns: 5.5em minmax(0, 1fr); gap: 12px; padding: 10px 2px; border-bottom: 1.5px solid var(--line); font-size: 14px; }
+.co-table dt { color: var(--plum); font-weight: 700; font-family: var(--display); }
+.co-table dd { margin: 0; }
+.co-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+.co-links a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px;
+  font-size: 14px; font-weight: 700; text-decoration: none; -webkit-tap-highlight-color: transparent;
+}
+.co-more { border: 1.5px solid var(--plum); color: var(--plum); }
+.co-more::after { content: "↗"; margin-left: 6px; font-size: 12px; }
+.co-jump { background: var(--pink); color: #fff; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* トップ（気持ち診断） */
+.hero { margin-top: 40px; padding: 28px 0 8px; border-top: 2px dashed var(--line); display: flex; flex-direction: column; gap: 18px; }
 .hero .eyebrow { font-family: var(--display); color: var(--pink); font-weight: 700; font-size: 14px; letter-spacing: .04em; }
 .hero h1 { font-size: clamp(26px, 7vw, 34px); }
 .hero .illust { aspect-ratio: 16 / 10; }
@@ -139,7 +159,24 @@
 
   <!-- トップ -->
   <section id="view-top">
-    <div class="hero">
+    <div class="company">
+      <span class="eyebrow rise">ABOUT US ・ 会社概要</span>
+      <h1 class="rise" style="--d:.08s">労働を感動へ</h1>
+      <p class="rise" style="--d:.16s">スタッフブリッジは、ファッション業界に特化した人材サービスの会社です。人材派遣・転職支援・求人サイトなどを通して、ファッションの仕事で働く人を応援しています。</p>
+      <dl class="co-table rise" style="--d:.24s">
+        <div><dt>会社名</dt><dd>株式会社 スタッフブリッジ</dd></div>
+        <div><dt>事業内容</dt><dd>ファッション業界に特化したiT人材サービスの提供</dd></div>
+        <div><dt>設立</dt><dd>2005年8月24日</dd></div>
+        <div><dt>資本金</dt><dd>5000万円</dd></div>
+        <div><dt>所在地</dt><dd>東京都新宿区新宿4-1-6<br>JR新宿ミライナタワー16F</dd></div>
+      </dl>
+      <div class="co-links rise" style="--d:.32s">
+        <a class="co-more" href="https://www.staff-b.com/company/" target="_blank" rel="noopener">会社のくわしい情報を見る</a>
+        <a class="co-jump" href="#shindan">1分の気持ち診断へ ↓</a>
+      </div>
+    </div>
+
+    <div class="hero" id="shindan">
       <span class="eyebrow rise">1分でできる 就活きもち診断</span>
       <h1 class="rise" style="--d:.1s">いまの就活の気持ち、<br>4択で教えてください。</h1>
       <div class="illust floaty rise" style="--d:.25s" data-img="hero.png"></div>
@@ -233,11 +270,11 @@
   </div>
 </footer>
 
-<script src="js/config.js?v=20261117d"></script>
-<script src="js/analytics.js?v=20261117d"></script>
-<script src="js/content.js?v=20261117d"></script>
-<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261117d"></script>
-<script src="js/common.js?v=20261117d"></script>
-<script src="js/quiz.js?v=20261117d"></script>
+<script src="js/config.js?v=20261117e"></script>
+<script src="js/analytics.js?v=20261117e"></script>
+<script src="js/content.js?v=20261117e"></script>
+<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261117e"></script>
+<script src="js/common.js?v=20261117e"></script>
+<script src="js/quiz.js?v=20261117e"></script>
 </body>
 </html>
