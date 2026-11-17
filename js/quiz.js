@@ -118,6 +118,30 @@
     track("quiz_result", { result_type: state.type, result_name: r.name, stage: state.stage, style: state.style });
   }
 
+  // 会社概要の写真の高さを、左の文字（見出し〜紹介文）の高さにそろえる。
+  // 写真の列の幅を少しずつ広げて、「写真の高さ ≧ 文字の高さ」になる一番細い幅を探す（画面幅が変わったら計算し直す）
+  var coIntro = document.querySelector(".co-intro");
+  var coText = document.querySelector(".co-text");
+  var coImg = document.querySelector(".co-photo img");
+  if (coIntro && coText && coImg) {
+    var RATIO = 307 / 630; // 写真の 横÷縦
+    var fitPhoto = function () {
+      var total = coIntro.getBoundingClientRect().width;
+      if (!total) return;
+      var maxW = Math.round(total * 0.42), w = 70, h = 0;
+      for (; w <= maxW; w += 2) {
+        coIntro.style.setProperty("--photo-w", w + "px");
+        h = coText.getBoundingClientRect().height;
+        if (w / RATIO >= h) break;
+      }
+      coImg.style.setProperty("--photo-h", Math.round(Math.min(h, w / RATIO)) + "px");
+    };
+    var timer;
+    fitPhoto();
+    window.addEventListener("resize", function () { clearTimeout(timer); timer = setTimeout(fitPhoto, 150); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitPhoto);
+  }
+
   // 採用実績ブランドのロゴを横に流す。同じ列を2回並べて途切れずに流れ続けるようにする（2回目は読み上げ対象外）
   var brandTrack = $("brandTrack");
   if (brandTrack && C.brands) {

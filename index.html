@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=20261117f">
+<link rel="stylesheet" href="css/style.css?v=20261117i">
 <style>
 /* 会社概要（トップの一番上） */
 .company { padding: 28px 0 8px; display: flex; flex-direction: column; gap: 14px; }
@@ -23,15 +23,16 @@
 .company h1 { font-size: clamp(28px, 8vw, 36px); letter-spacing: .04em; }
 .company p { margin: 0; color: var(--fg); font-size: 15px; }
 /* 見出しと写真を横に並べる（写真は右） */
-.co-intro { display: grid; grid-template-columns: minmax(0, 1fr) 36%; align-items: end; gap: 8px; }
-.co-text { display: flex; flex-direction: column; gap: 12px; padding-bottom: 8px; }
-.co-photo { position: relative; display: flex; justify-content: center; }
+/* 写真の高さは、左の文字（見出し〜紹介文）の高さに合わせる。写真の列の幅は quiz.js で計算する */
+.co-intro { display: grid; grid-template-columns: minmax(0, 1fr) var(--photo-w, 110px); align-items: start; gap: 14px; }
+.co-text { display: flex; flex-direction: column; gap: 12px; }
+.co-photo { position: relative; display: flex; align-items: flex-end; justify-content: center; }
 .co-photo::before {
-  content: ""; position: absolute; left: 50%; bottom: 6%; width: 120%; aspect-ratio: 1;
+  content: ""; position: absolute; left: 50%; bottom: 4%; width: 135%; aspect-ratio: 1;
   transform: translateX(-50%); border-radius: 50%; background: var(--pink-bg); z-index: 0;
 }
-.co-photo img { position: relative; z-index: 1; width: 100%; max-width: 200px; height: auto; }
-@media (min-width: 600px) { .co-intro { grid-template-columns: minmax(0, 1fr) 32%; } }
+.co-photo img { position: relative; z-index: 1; width: auto; max-width: 100%; height: var(--photo-h, auto); }
+.co-intro p { font-size: 14px; }
 .co-table { margin: 4px 0 0; border-top: 1.5px solid var(--line); }
 .co-table > div { display: grid; grid-template-columns: 5.5em minmax(0, 1fr); gap: 12px; padding: 10px 2px; border-bottom: 1.5px solid var(--line); font-size: 14px; }
 .co-table dt { color: var(--plum); font-weight: 700; font-family: var(--display); }
@@ -170,9 +171,9 @@ html { scroll-behavior: smooth; }
   <!-- トップ -->
   <section id="view-top">
     <div class="company">
+      <span class="eyebrow rise">ABOUT US ・ 会社概要</span>
       <div class="co-intro">
         <div class="co-text">
-          <span class="eyebrow rise">ABOUT US ・ 会社概要</span>
           <h1 class="rise" style="--d:.08s">労働を感動へ</h1>
           <p class="rise" style="--d:.16s">スタッフブリッジは、ファッション業界に特化した人材サービスの会社です。人材派遣・転職支援・求人サイトなどを通して、ファッションの仕事で働く人を応援しています。</p>
         </div>
@@ -287,11 +288,11 @@ html { scroll-behavior: smooth; }
   </div>
 </footer>
 
-<script src="js/config.js?v=20261117f"></script>
-<script src="js/analytics.js?v=20261117f"></script>
-<script src="js/content.js?v=20261117f"></script>
-<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261117f"></script>
-<script src="js/common.js?v=20261117f"></script>
-<script src="js/quiz.js?v=20261117f"></script>
+<script src="js/config.js?v=20261117i"></script>
+<script src="js/analytics.js?v=20261117i"></script>
+<script src="js/content.js?v=20261117i"></script>
+<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261117i"></script>
+<script src="js/common.js?v=20261117i"></script>
+<script src="js/quiz.js?v=20261117i"></script>
 </body>
 </html>
