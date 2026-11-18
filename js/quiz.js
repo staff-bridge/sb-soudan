@@ -12,6 +12,14 @@
     state = { current: "q1", history: [], type: null, stage: null, style: null };
   }
 
+  // スマホ・ブラウザの「戻る」ボタンでも1問ずつ戻れるように、質問や結果を出すたびにブラウザの履歴に1つ積む。
+  // depth は「トップ＝0、1問目＝1、2問目＝2 … 結果」の段階
+  function depth() { return views.top.hidden ? state.history.length + 1 : 0; }
+  function pushStep() {
+    try { history.pushState({ sb: depth() }, "", location.href); } catch (e) { /* 履歴が使えない環境でも動くようにする */ }
+  }
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
   function show(name) {
     Object.keys(views).forEach(function (k) { views[k].hidden = k !== name; });
     window.scrollTo(0, 0);
@@ -70,8 +78,8 @@
     state.history.push({ id: id, choice: i, type: state.type });
     track("quiz_answer", { question_id: id, answer: "ABCD"[i], step: state.history.length });
 
-    if (id === "q4") { state.stage = i; state.current = "q5"; return renderQuestion(); }
-    if (id === "q5") { state.style = i; return renderResult(); }
+    if (id === "q4") { state.stage = i; state.current = "q5"; renderQuestion(); return pushStep(); }
+    if (id === "q5") { state.style = i; renderResult(); return pushStep(); }
 
     if (opt.next.charAt(0) === "t") {
       state.type = opt.next;
@@ -80,6 +88,7 @@
       state.current = opt.next;
     }
     renderQuestion();
+    pushStep();
   }
 
   function back() {
@@ -91,7 +100,18 @@
     if (last.id === "q4") state.stage = null;
     if (last.id === "q5") state.style = null;
     renderQuestion();
+    if (views.quiz.hidden) show("quiz");
   }
+
+  // ブラウザの「戻る」「進む」が押されたとき
+  window.addEventListener("popstate", function (e) {
+    var target = (e.state && typeof e.state.sb === "number") ? e.state.sb : 0;
+    var cur = depth();
+    if (target === cur) return;
+    if (target === 0) { reset(); show("top"); return; }
+    if (target > cur) { history.go(cur - target); return; } // 「進む」は使わない（答え直しになるため元の位置へ戻す）
+    while (depth() > target && state.history.length) back();
+  });
 
   function renderResult() {
     var r = C.results[state.type];
@@ -142,18 +162,23 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitPhoto);
   }
 
-  // 採用実績ブランドのロゴを横に流す。同じ列を2回並べて途切れずに流れ続けるようにする（2回目は読み上げ対象外）
+  // 採用実績ブランドのロゴを横に流す（img/brands-mono は黒一色にしておいた画像。スマホで filter を使わないため）。同じ列を2回並べて途切れずに流れ続けるようにする（2回目は読み上げ対象外）
   var brandTrack = $("brandTrack");
   if (brandTrack && C.brands) {
     var one = C.brands.map(function (b) {
-      return '<li><img src="img/brands/' + b[0] + '" alt="' + b[1] + '" width="160" height="100" decoding="async"></li>';
+      return '<li><img src="img/brands-mono/' + b[0] + '" alt="' + b[1] + '" width="160" height="100"></li>';
     }).join("");
     brandTrack.innerHTML = "<ul>" + one + '</ul><ul aria-hidden="true">' + one + "</ul>";
   }
 
-  $("start").addEventListener("click", function () { reset(); renderQuestion(); show("quiz"); track("quiz_start"); });
-  $("back").addEventListener("click", back);
-  $("retry").addEventListener("click", function () { reset(); show("top"); track("quiz_retry"); });
+  $("start").addEventListener("click", function () { reset(); renderQuestion(); show("quiz"); pushStep(); track("quiz_start"); });
+  $("back").addEventListener("click", function () { history.back(); });
+  $("retry").addEventListener("click", function () {
+    track("quiz_retry");
+    var cur = depth();
+    if (cur > 0) history.go(-cur); else { reset(); show("top"); }
+  });
   $("r-entry").addEventListener("click", function () { track("entry_click", { result_type: state.type }); });
   reset();
+  try { history.replaceState({ sb: 0 }, "", location.href); } catch (e) { /* 何もしない */ }
 })();
