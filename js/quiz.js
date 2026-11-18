@@ -162,11 +162,11 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitPhoto);
   }
 
-  // 採用実績ブランドのロゴを横に流す（img/brands-mono は黒一色にしておいた画像。スマホで filter を使わないため）。同じ列を2回並べて途切れずに流れ続けるようにする（2回目は読み上げ対象外）
+  // 採用実績ブランドのロゴを横に流す（img/brands-color は正式な色のロゴ。面接対策ガイド用にピンクにしていた5つを正式な色に戻したもの）。同じ列を2回並べて途切れずに流れ続けるようにする（2回目は読み上げ対象外）
   var brandTrack = $("brandTrack");
   if (brandTrack && C.brands) {
     var one = C.brands.map(function (b) {
-      return '<li><img src="img/brands-mono/' + b[0] + '" alt="' + b[1] + '" width="160" height="100"></li>';
+      return '<li><img src="img/brands-color/' + b[0] + '" alt="' + b[1] + '" width="160" height="100"></li>';
     }).join("");
     brandTrack.innerHTML = "<ul>" + one + '</ul><ul aria-hidden="true">' + one + "</ul>";
   }
