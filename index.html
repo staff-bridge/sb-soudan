@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=20261118j">
+<link rel="stylesheet" href="css/style.css?v=20261118k">
 <style>
 /* 会社概要（トップの一番上） */
 .company { padding: 28px 0 8px; display: flex; flex-direction: column; gap: 14px; }
@@ -36,24 +36,15 @@
 /* オフィス写真（トップの一番上） */
 .co-hero { margin: 0; overflow: hidden; aspect-ratio: 4 / 1; background: var(--pink-bg); }
 .co-hero img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 58%; }
-/* 4つのサービス（スマホでも2列）。文章は1行11文字以内で<br>を入れて改行位置をそろえる */
+/* 4つのサービス：数字を主役にする（スマホでも2列） */
 .co-svc { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-.co-svc li { background: var(--pink-bg); border-radius: 14px; padding: 12px 11px 13px; display: flex; flex-direction: column; gap: 6px; }
-.co-svc .svc-head { display: flex; align-items: baseline; gap: 6px; }
+.co-svc li { background: var(--pink-bg); border-radius: 14px; padding: 12px 12px 14px; display: flex; flex-direction: column; gap: 2px; container-type: inline-size; }
+.co-svc .svc-head { display: flex; align-items: baseline; gap: 6px; margin-bottom: 4px; }
 .co-svc .no { font-family: var(--display); font-size: 11px; font-weight: 700; color: var(--pink); letter-spacing: .08em; }
-.co-svc b { font-family: var(--display); color: var(--plum); font-size: 15px; }
-/* 説明文は枠の幅に合わせて文字の大きさを決める（いちばん長い行＝11文字が必ず1行に入る）。<br>以外では改行しない */
-.co-svc li { container-type: inline-size; }
-.co-svc p { font-size: 11.5px; font-size: min(13px, 8.4cqi); line-height: 1.65; white-space: nowrap; letter-spacing: 0; }
-/* br.m＝狭いカード（スマホ）だけの改行、br.w＝広いカード（PC・タブレット）だけの改行。広いカードでは文の終わりだけで改行する */
-.co-svc p br.w { display: none; }
-@container (min-width: 240px) {
-  .co-svc p { white-space: normal; font-size: 13px; }
-  .co-svc p br.m { display: none; }
-  .co-svc p br.w { display: inline; }
-}
-/* iPhone SE（初代）など幅の狭い画面では、2列だと行が崩れるので1列にして <br> をなくす */
-@media (max-width: 359px) { .co-svc { grid-template-columns: 1fr; } .co-svc p { white-space: normal; font-size: 12.5px; } .co-svc p br { display: none; } }
+.co-svc b { font-family: var(--display); color: var(--plum); font-size: 14px; }
+.co-svc .num { font-family: var(--display); font-weight: 700; color: var(--pink); font-size: 26px; font-size: min(30px, 20cqi); line-height: 1.15; letter-spacing: .01em; white-space: nowrap; }
+.co-svc .num small { font-size: 12px; font-size: min(13px, 8.6cqi); margin-left: 2px; color: var(--plum); }
+.co-svc .cap { font-size: 12px; color: var(--muted); line-height: 1.5; }
 .co-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
 .co-links a {
   display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px;
@@ -195,17 +186,17 @@ html { scroll-behavior: smooth; }
       <div class="co-intro">
         <div class="co-text">
           <h1 class="rise" style="--d:.08s">労働を感動へ</h1>
-          <p class="rise" style="--d:.16s">スタッフブリッジは、ファッション業界に特化した人材サービスの会社です。人材派遣・転職支援・求人サイトなどを通して、ファッションの仕事で働く人を応援しています。</p>
+          <p class="rise" style="--d:.16s">ファッション業界に特化した人材サービスの会社です。</p>
         </div>
         <div class="co-photo rise" style="--d:.2s">
           <img src="img/company-model.png" alt="" width="307" height="630" decoding="async">
         </div>
       </div>
       <ul class="co-svc">
-        <li class="rise" style="--d:.24s"><div class="svc-head"><span class="no">01</span><b>人材派遣</b></div><p>派遣人数<br class="m">7,000人を突破。<br>手厚いフォローと、<br>地域No.1の待遇で<br class="m">圧倒的なシェアを確立。</p></li>
-        <li class="rise" style="--d:.28s"><div class="svc-head"><span class="no">02</span><b>転職支援</b></div><p>多くのアパレル／<br class="m">コスメブランドから<br>依頼を受け、<br class="m">年間700名以上の<br>転職を支援しています。</p></li>
-        <li class="rise" style="--d:.32s"><div class="svc-head"><span class="no">03</span><b>求人サイト</b></div><p>ファッションの<br class="m">求人サイト「TWC」を<br class="m">運営。<br class="w">1,200ブランドが<br class="m">参加しております。</p></li>
-        <li class="rise" style="--d:.36s"><div class="svc-head"><span class="no">04</span><b>販売代行</b></div><p>ブランドのショップを<br class="m">まるごと運営。<br>約120店舗を<br class="m">担当しております。</p></li>
+        <li class="rise" style="--d:.24s"><div class="svc-head"><span class="no">01</span><b>人材派遣</b></div><p class="num">7,000<small>人+</small></p><p class="cap">派遣スタッフが活躍</p></li>
+        <li class="rise" style="--d:.28s"><div class="svc-head"><span class="no">02</span><b>転職支援</b></div><p class="num">700<small>名+</small></p><p class="cap">年間の転職を支援</p></li>
+        <li class="rise" style="--d:.32s"><div class="svc-head"><span class="no">03</span><b>求人サイト</b></div><p class="num">1,200<small>ブランド</small></p><p class="cap">「TWC」に参加</p></li>
+        <li class="rise" style="--d:.36s"><div class="svc-head"><span class="no">04</span><b>販売代行</b></div><p class="num">120<small>店舗</small></p><p class="cap">ショップをまるごと運営</p></li>
       </ul>
       <div class="co-links rise" style="--d:.32s">
         <a class="co-more" href="https://www.staff-b.com/company/" target="_blank" rel="noopener">会社のくわしい情報を見る</a>
@@ -308,11 +299,11 @@ html { scroll-behavior: smooth; }
   </div>
 </footer>
 
-<script src="js/config.js?v=20261118j"></script>
-<script src="js/analytics.js?v=20261118j"></script>
-<script src="js/content.js?v=20261118j"></script>
-<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261118j"></script>
-<script src="js/common.js?v=20261118j"></script>
-<script src="js/quiz.js?v=20261118j"></script>
+<script src="js/config.js?v=20261118k"></script>
+<script src="js/analytics.js?v=20261118k"></script>
+<script src="js/content.js?v=20261118k"></script>
+<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261118k"></script>
+<script src="js/common.js?v=20261118k"></script>
+<script src="js/quiz.js?v=20261118k"></script>
 </body>
 </html>
