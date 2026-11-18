@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=20261118h">
+<link rel="stylesheet" href="css/style.css?v=20261118i">
 <style>
 /* 会社概要（トップの一番上） */
 .company { padding: 28px 0 8px; display: flex; flex-direction: column; gap: 14px; }
@@ -42,9 +42,11 @@
 .co-svc .svc-head { display: flex; align-items: baseline; gap: 6px; }
 .co-svc .no { font-family: var(--display); font-size: 11px; font-weight: 700; color: var(--pink); letter-spacing: .08em; }
 .co-svc b { font-family: var(--display); color: var(--plum); font-size: 15px; }
-.co-svc p { font-size: 12.5px; line-height: 1.65; }
+/* 説明文は枠の幅に合わせて文字の大きさを決める（いちばん長い行＝11文字が必ず1行に入る）。<br>以外では改行しない */
+.co-svc li { container-type: inline-size; }
+.co-svc p { font-size: 11.5px; font-size: min(13px, 8.4cqi); line-height: 1.65; white-space: nowrap; letter-spacing: 0; }
 /* iPhone SE（初代）など幅の狭い画面では、2列だと行が崩れるので1列にして <br> をなくす */
-@media (max-width: 359px) { .co-svc { grid-template-columns: 1fr; } .co-svc p br { display: none; } }
+@media (max-width: 359px) { .co-svc { grid-template-columns: 1fr; } .co-svc p { white-space: normal; font-size: 12.5px; } .co-svc p br { display: none; } }
 .co-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
 .co-links a {
   display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px;
@@ -299,11 +301,11 @@ html { scroll-behavior: smooth; }
   </div>
 </footer>
 
-<script src="js/config.js?v=20261118h"></script>
-<script src="js/analytics.js?v=20261118h"></script>
-<script src="js/content.js?v=20261118h"></script>
-<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261118h"></script>
-<script src="js/common.js?v=20261118h"></script>
-<script src="js/quiz.js?v=20261118h"></script>
+<script src="js/config.js?v=20261118i"></script>
+<script src="js/analytics.js?v=20261118i"></script>
+<script src="js/content.js?v=20261118i"></script>
+<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261118i"></script>
+<script src="js/common.js?v=20261118i"></script>
+<script src="js/quiz.js?v=20261118i"></script>
 </body>
 </html>
