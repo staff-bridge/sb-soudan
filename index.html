@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=20261118e">
+<link rel="stylesheet" href="css/style.css?v=20261118f">
 <style>
 /* 会社概要（トップの一番上） */
 .company { padding: 28px 0 8px; display: flex; flex-direction: column; gap: 14px; }
@@ -36,13 +36,13 @@
 /* オフィス写真（トップの一番上） */
 .co-hero { margin: 0; overflow: hidden; aspect-ratio: 4 / 1; background: var(--pink-bg); }
 .co-hero img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 58%; }
-/* 4つのサービス（スマホでも2列） */
-.co-svc { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-.co-svc li { background: var(--pink-bg); border-radius: 14px; padding: 12px 12px 13px; display: flex; flex-direction: column; gap: 4px; }
-.co-svc .no { font-family: var(--display); font-size: 11px; font-weight: 700; color: var(--pink); letter-spacing: .08em; }
-.co-svc .svc-head { display: flex; align-items: baseline; gap: 6px; }
-.co-svc b { font-family: var(--display); color: var(--plum); font-size: 15px; }
-.co-svc p { font-size: 12.5px; line-height: 1.6; }
+/* 4つのサービス（1列の横長カード） */
+.co-svc { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.co-svc li { background: var(--pink-bg); border-radius: 14px; padding: 12px 16px 13px; display: flex; flex-direction: column; gap: 4px; }
+.co-svc .svc-head { display: flex; align-items: baseline; gap: 8px; }
+.co-svc .no { font-family: var(--display); font-size: 12px; font-weight: 700; color: var(--pink); letter-spacing: .08em; }
+.co-svc b { font-family: var(--display); color: var(--plum); font-size: 16px; }
+.co-svc p { font-size: 13.5px; line-height: 1.75; }
 .co-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
 .co-links a {
   display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px;
@@ -191,10 +191,10 @@ html { scroll-behavior: smooth; }
         </div>
       </div>
       <ul class="co-svc">
-        <li class="rise" style="--d:.24s"><div class="svc-head"><span class="no">01</span><b>人材派遣</b></div><p>ファッションブランドのショップで働く派遣スタッフ。7,000人以上が活躍中。</p></li>
-        <li class="rise" style="--d:.28s"><div class="svc-head"><span class="no">02</span><b>転職支援</b></div><p>ブランドへの転職をサポート。年間700人以上の転職が決まっています。</p></li>
-        <li class="rise" style="--d:.32s"><div class="svc-head"><span class="no">03</span><b>求人サイト</b></div><p>ファッション業界の求人サイト「TWC」を運営。1,200ブランドが参加。</p></li>
-        <li class="rise" style="--d:.36s"><div class="svc-head"><span class="no">04</span><b>販売代行</b></div><p>自社スタッフでショップを運営。セレクトからラグジュアリーまで約120店舗。</p></li>
+        <li class="rise" style="--d:.24s"><div class="svc-head"><span class="no">01</span><b>人材派遣</b></div><p>ショップで働きたい人とブランドをつなぎます。<br>7,000人以上のスタッフが活躍中です。</p></li>
+        <li class="rise" style="--d:.28s"><div class="svc-head"><span class="no">02</span><b>転職支援</b></div><p>ファッション業界への転職をサポートします。<br>年間700人以上の転職が決まっています。</p></li>
+        <li class="rise" style="--d:.32s"><div class="svc-head"><span class="no">03</span><b>求人サイト</b></div><p>ファッションの求人サイト「TWC」を運営。<br>1,200ブランドの求人が集まっています。</p></li>
+        <li class="rise" style="--d:.36s"><div class="svc-head"><span class="no">04</span><b>販売代行</b></div><p>ブランドのショップ運営をまるごと担当します。<br>セレクトから高級ブランドまで約120店舗。</p></li>
       </ul>
       <div class="co-links rise" style="--d:.32s">
         <a class="co-more" href="https://www.staff-b.com/company/" target="_blank" rel="noopener">会社のくわしい情報を見る</a>
@@ -297,11 +297,11 @@ html { scroll-behavior: smooth; }
   </div>
 </footer>
 
-<script src="js/config.js?v=20261118e"></script>
-<script src="js/analytics.js?v=20261118e"></script>
-<script src="js/content.js?v=20261118e"></script>
-<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261118e"></script>
-<script src="js/common.js?v=20261118e"></script>
-<script src="js/quiz.js?v=20261118e"></script>
+<script src="js/config.js?v=20261118f"></script>
+<script src="js/analytics.js?v=20261118f"></script>
+<script src="js/content.js?v=20261118f"></script>
+<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261118f"></script>
+<script src="js/common.js?v=20261118f"></script>
+<script src="js/quiz.js?v=20261118f"></script>
 </body>
 </html>
