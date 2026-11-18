@@ -125,7 +125,9 @@
     r.can.forEach(function (t) {
       var li = document.createElement("li"); set(li, t); ul.appendChild(li);
     });
-    set($("r-style"), C.questions.q5.options[state.style].message);
+    var q5 = C.questions.q5.options[state.style];
+    $("r-style-title").textContent = q5.noteTitle || "当日のすすめ方";
+    set($("r-style"), q5.message);
     set($("r-stage"), "あなたの今の状況：" + C.questions.q4.options[state.stage].label);
 
     var q = new URLSearchParams({ type: state.type, stage: String(state.stage), style: String(state.style) });
