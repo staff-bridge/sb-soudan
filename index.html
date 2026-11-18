@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=20261118a">
+<link rel="stylesheet" href="css/style.css?v=20261118b">
 <style>
 /* 会社概要（トップの一番上） */
 .company { padding: 28px 0 8px; display: flex; flex-direction: column; gap: 14px; }
@@ -33,10 +33,14 @@
 }
 .co-photo img { position: relative; z-index: 1; width: auto; max-width: 100%; height: var(--photo-h, auto); }
 .co-intro p { font-size: 14px; }
+/* オフィス写真（トップの一番上） */
+.co-hero { margin: 0; border-radius: var(--radius); overflow: hidden; aspect-ratio: 3 / 2; background: var(--pink-bg); }
+.co-hero img { display: block; width: 100%; height: 100%; object-fit: cover; }
 /* 4つのサービス（スマホでも2列） */
 .co-svc { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .co-svc li { background: var(--pink-bg); border-radius: 14px; padding: 12px 12px 13px; display: flex; flex-direction: column; gap: 4px; }
 .co-svc .no { font-family: var(--display); font-size: 11px; font-weight: 700; color: var(--pink); letter-spacing: .08em; }
+.co-svc .svc-head { display: flex; align-items: baseline; gap: 6px; }
 .co-svc b { font-family: var(--display); color: var(--plum); font-size: 15px; }
 .co-svc p { font-size: 12.5px; line-height: 1.6; }
 .co-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
@@ -95,6 +99,8 @@ html { scroll-behavior: smooth; }
 .facts dd { margin: 0; font-family: var(--display); font-weight: 700; color: var(--plum); font-size: 15px; line-height: 1.4; }
 .facts dd.big { color: var(--pink); font-size: 22px; }
 
+.place { overflow: hidden; }
+.place-photo { display: block; width: calc(100% + 40px); max-width: none; height: auto; aspect-ratio: 3 / 2; object-fit: cover; margin: -18px -20px 12px; background: var(--pink-bg); }
 .place p { margin: 0; }
 .place-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
 .place .pin svg { width: 22px; height: 22px; display: block; fill: none; stroke: var(--pink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
@@ -173,7 +179,8 @@ html { scroll-behavior: smooth; }
   <!-- トップ -->
   <section id="view-top">
     <div class="company">
-      <span class="eyebrow rise">ABOUT US</span>
+      <figure class="co-hero rise"><img src="img/office-entrance.webp" alt="スタッフブリッジのオフィス入口" width="1200" height="800" decoding="async" fetchpriority="high"></figure>
+      <span class="eyebrow rise" style="--d:.06s">ABOUT US</span>
       <div class="co-intro">
         <div class="co-text">
           <h1 class="rise" style="--d:.08s">労働を感動へ</h1>
@@ -184,10 +191,10 @@ html { scroll-behavior: smooth; }
         </div>
       </div>
       <ul class="co-svc">
-        <li class="rise" style="--d:.24s"><span class="no">01</span><b>人材派遣</b><p>ファッションブランドのショップで働く派遣スタッフ。7,000人以上が活躍中。</p></li>
-        <li class="rise" style="--d:.28s"><span class="no">02</span><b>転職支援</b><p>ブランドへの転職をサポート。年間700人以上の転職が決まっています。</p></li>
-        <li class="rise" style="--d:.32s"><span class="no">03</span><b>求人サイト</b><p>ファッション業界の求人サイト「TWC」を運営。1,200ブランドが参加。</p></li>
-        <li class="rise" style="--d:.36s"><span class="no">04</span><b>販売代行</b><p>自社スタッフでショップを運営。セレクトからラグジュアリーまで約120店舗。</p></li>
+        <li class="rise" style="--d:.24s"><div class="svc-head"><span class="no">01</span><b>人材派遣</b></div><p>ファッションブランドのショップで働く派遣スタッフ。7,000人以上が活躍中。</p></li>
+        <li class="rise" style="--d:.28s"><div class="svc-head"><span class="no">02</span><b>転職支援</b></div><p>ブランドへの転職をサポート。年間700人以上の転職が決まっています。</p></li>
+        <li class="rise" style="--d:.32s"><div class="svc-head"><span class="no">03</span><b>求人サイト</b></div><p>ファッション業界の求人サイト「TWC」を運営。1,200ブランドが参加。</p></li>
+        <li class="rise" style="--d:.36s"><div class="svc-head"><span class="no">04</span><b>販売代行</b></div><p>自社スタッフでショップを運営。セレクトからラグジュアリーまで約120店舗。</p></li>
       </ul>
       <div class="co-links rise" style="--d:.32s">
         <a class="co-more" href="https://www.staff-b.com/company/" target="_blank" rel="noopener">会社のくわしい情報を見る</a>
@@ -233,6 +240,7 @@ html { scroll-behavior: smooth; }
       </ul>
 
       <div class="place reveal" style="--d:.1s">
+        <img class="place-photo" src="img/office-studio.webp" alt="会場のinnovation Studio" width="1200" height="800" loading="lazy" decoding="async">
         <div class="place-head">
           <span class="pin" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle class="accent" cx="12" cy="9.5" r="2.5"/></svg></span>
           <span class="place-label">来社の場合の会場</span>
@@ -289,11 +297,11 @@ html { scroll-behavior: smooth; }
   </div>
 </footer>
 
-<script src="js/config.js?v=20261118a"></script>
-<script src="js/analytics.js?v=20261118a"></script>
-<script src="js/content.js?v=20261118a"></script>
-<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261118a"></script>
-<script src="js/common.js?v=20261118a"></script>
-<script src="js/quiz.js?v=20261118a"></script>
+<script src="js/config.js?v=20261118b"></script>
+<script src="js/analytics.js?v=20261118b"></script>
+<script src="js/content.js?v=20261118b"></script>
+<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261118b"></script>
+<script src="js/common.js?v=20261118b"></script>
+<script src="js/quiz.js?v=20261118b"></script>
 </body>
 </html>
