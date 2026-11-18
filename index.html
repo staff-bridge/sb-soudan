@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=20261118m">
+<link rel="stylesheet" href="css/style.css?v=20261118n">
 <style>
 /* 会社概要（トップの一番上） */
 .company { padding: 28px 0 8px; display: flex; flex-direction: column; gap: 14px; }
@@ -72,14 +72,12 @@ html { scroll-behavior: smooth; }
 .marquee::before, .marquee::after { content: ""; position: absolute; top: 0; bottom: 0; width: 8%; z-index: 1; pointer-events: none; }
 .marquee::before { left: 0; background: linear-gradient(90deg, var(--bg, #fff), rgba(255,255,255,0)); }
 .marquee::after { right: 0; background: linear-gradient(270deg, var(--bg, #fff), rgba(255,255,255,0)); }
-.marquee-track { display: flex; width: max-content; animation: brand-flow 27.5s linear infinite; will-change: transform; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+/* 帯の動きは quiz.js で1コマずつ動かす（CSSアニメーションだとiPhoneで止まることがあるため） */
+.marquee-track { display: flex; width: max-content; will-change: transform; }
 .marquee-track ul { display: flex; list-style: none; margin: 0; padding: 0; }
 .marquee-track li { flex: none; width: 96px; height: 44px; margin: 10px 14px; display: flex; align-items: center; justify-content: center; }
 .marquee-track img { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; }
-@media (min-width: 600px) { .marquee-track li { width: 132px; height: 56px; margin: 14px 22px; } .marquee-track { animation-duration: 35s; } }
-@keyframes brand-flow { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-/* 「視差効果を減らす」がオンの端末でも、ロゴはゆっくり流し続ける */
-@media (prefers-reduced-motion: reduce) { .marquee-track { animation-duration: 60s; } }
+@media (min-width: 600px) { .marquee-track li { width: 132px; height: 56px; margin: 14px 22px; } }
 
 .about { margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
 .about h2 { font-size: 21px; }
@@ -301,11 +299,11 @@ html { scroll-behavior: smooth; }
   </div>
 </footer>
 
-<script src="js/config.js?v=20261118m"></script>
-<script src="js/analytics.js?v=20261118m"></script>
-<script src="js/content.js?v=20261118m"></script>
-<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261118m"></script>
-<script src="js/common.js?v=20261118m"></script>
-<script src="js/quiz.js?v=20261118m"></script>
+<script src="js/config.js?v=20261118n"></script>
+<script src="js/analytics.js?v=20261118n"></script>
+<script src="js/content.js?v=20261118n"></script>
+<script src="js/vendor/budoux-ja-0.6.4.min.js?v=20261118n"></script>
+<script src="js/common.js?v=20261118n"></script>
+<script src="js/quiz.js?v=20261118n"></script>
 </body>
 </html>

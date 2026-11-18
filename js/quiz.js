@@ -169,6 +169,24 @@
       return '<li><img src="img/brands-color/' + b[0] + '" alt="' + b[1] + '" width="160" height="100"></li>';
     }).join("");
     brandTrack.innerHTML = "<ul>" + one + '</ul><ul aria-hidden="true">' + one + "</ul>";
+
+    // 1コマごとに少しずつ左へ動かし、1列ぶん進んだら最初に戻す（2列目が1列目と同じなので継ぎ目は見えない）。
+    // 「視差効果を減らす」がオンの端末では、ゆっくり流す
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var speed = reduce ? 30 : 65; // 1秒あたりに進む距離（px）
+    var firstList = brandTrack.firstChild, x = 0, last = 0;
+    var step = function (now) {
+      var dt = last ? Math.min(now - last, 100) : 0; // タブを離れて戻ったときに大きく飛ばないようにする
+      last = now;
+      var w = firstList.getBoundingClientRect().width;
+      if (w) {
+        x -= speed * dt / 1000;
+        if (x <= -w) x += w;
+        brandTrack.style.transform = "translate3d(" + x.toFixed(2) + "px,0,0)";
+      }
+      window.requestAnimationFrame(step);
+    };
+    window.requestAnimationFrame(step);
   }
 
   $("start").addEventListener("click", function () { reset(); renderQuestion(); show("quiz"); pushStep(); track("quiz_start"); });
