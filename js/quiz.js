@@ -118,11 +118,14 @@
     $("r-tag").textContent = "あなたは " + r.no + " " + r.name;
     window.SB.setIllust($("r-illust"), r.image);
     var set = window.SB.setText;
-    set($("r-title"), r.title);
-    set($("r-lead"), r.lead);
+    // Q5で「相談を希望しない」(B) を選んだ人には、「一緒に」を外した文と、ひとりでできるヒントを出す
+    var solo = state.style === 1 && r.solo;
+    set($("r-title"), solo ? r.solo.title : r.title);
+    set($("r-lead"), solo ? r.solo.lead : r.lead);
+    $("r-can-title").textContent = solo ? "ひとりでできるヒント" : "相談会でできること";
     var ul = $("r-can");
     ul.innerHTML = "";
-    r.can.forEach(function (t) {
+    (solo ? r.solo.tips : r.can).forEach(function (t) {
       var li = document.createElement("li"); set(li, t); ul.appendChild(li);
     });
     var q5 = C.questions.q5.options[state.style];
