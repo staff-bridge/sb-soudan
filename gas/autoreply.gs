@@ -15,7 +15,7 @@ var SETTINGS = {
   REPLY_TO: '',                                   // 学生が返信したときの宛先（空なら送り主＝このフォームの持ち主）
   SENDER_NAME: 'スタッフブリッジ 就活相談会事務局', // メールの送り主として表示される名前
   REPLY_DAYS: 2,                                  // 「〇営業日以内にご連絡します」の日数
-  SITE_URL: 'https://staff-bridge.github.io/sb-soudan/'
+  SITE_URL: 'https://staff-bridge-o.netlify.app/'
 };
 // ================
 
